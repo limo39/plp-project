@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-w)^2(m86x-*e9qm49xuyuv8pjh!u)4po+a6wm@$ix-tu%1imer
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '8000-limo39-plp-project-spo05ibey3.app.codeanywhere.com',
+]
 
 
 # Application definition
@@ -40,7 +42,7 @@ INSTALLED_APPS = [
 
     'personal_finance', 
     'peer_to_peer_lending', 
-    '8000-limo39-plp-project-spo05ibey3.app.codeanywhere.com',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +127,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_REDIRECT_URL = '/accounts/'

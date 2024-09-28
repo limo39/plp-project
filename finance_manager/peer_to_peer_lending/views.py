@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Borrower, Loan, Investor
 
 # View for the homepage
-def platform_dashboard(request):
+def dashboard(request):
     loans = Loan.objects.all()
     investors = Investor.objects.all()
     
@@ -11,7 +11,7 @@ def platform_dashboard(request):
         'loans': loans,
         'investors': investors,
     }
-    return render(request, 'peer_lending/dashboard.html', context)
+    return render(request, 'peer_to_peer_lending/dashboard.html', context)
 
 # View for creating a loan listing
 def create_loan(request):
@@ -67,3 +67,33 @@ def loan_list(request):
         'loans': loans,
     }
     return render(request, 'peer_to_peer_lending/loan_list.html', context)
+
+
+def add_loan(request):
+    if request.method == 'POST':
+        # Retrieve data from the form
+        borrower = request.POST['borrower']
+        amount = request.POST['amount']
+        interest_rate = request.POST['interest_rate']
+        term = request.POST['term']
+
+        # Save the new loan to the database
+        Loan.objects.create(borrower=borrower, amount=amount, interest_rate=interest_rate, term=term)
+        return redirect('loan_list')
+
+    return render(request, 'peer_to_peer_lending/create_loan.html')
+
+def add_investor(request):
+    if request.method == 'POST':
+        # Get data from the form
+        investor_name = request.POST['investor_name']
+        investment_amount = request.POST['investment_amount']
+        
+        # Save to database
+        Investor.objects.create(
+            investor_name=investor_name,
+            investment_amount=investment_amount
+        )
+        return redirect('investor_list')  # Redirect to the investor list after adding
+
+    return render(request, 'peer_to_peer_lending/add_investor.html')
