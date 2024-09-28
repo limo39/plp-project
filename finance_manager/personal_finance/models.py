@@ -1,22 +1,27 @@
 from django.db import models
 
-class Transaction(models.Model):
-    CATEGORY_CHOICES = [
-        ('Food', 'Food'),
-        ('Transport', 'Transport'),
-        ('Entertainment', 'Entertainment'),
-        ('Other', 'Other'),
-    ]
+# Model for tracking Expenses
+class Expense(models.Model):
+    category = models.CharField(max_length=100)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     date = models.DateField()
-    description = models.TextField()
 
+    def __str__(self):
+        return f"{self.category} - {self.amount} on {self.date}"
+
+# Model for setting Budgets
 class Budget(models.Model):
-    category = models.CharField(max_length=20)
+    category = models.CharField(max_length=100)
     limit = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self):
+        return f"Budget for {self.category} - {self.limit}"
+
+# Model for Financial Goals
 class FinancialGoal(models.Model):
-    goal_name = models.CharField(max_length=100)
+    goal_name = models.CharField(max_length=200)
     target_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    due_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Goal: {self.goal_name}, Target: {self.target_amount}"

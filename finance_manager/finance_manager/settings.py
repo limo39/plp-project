@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    'personal_finance', 
+    'peer_to_peer_lending', 
+    '8000-limo39-plp-project-spo05ibey3.app.codeanywhere.com',
 ]
 
 MIDDLEWARE = [
